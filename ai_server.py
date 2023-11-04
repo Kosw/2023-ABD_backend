@@ -18,11 +18,15 @@ classes = ["코르크 마개", "키보드"]
     
 
 def predict_image(filename, model):
+    print("1")
     img_ = image.load_img(filename, target_size=(224, 224))
+    print("2")
     img_array = image.img_to_array(img_)
+    print("3")
     img_processed = np.expand_dims(img_array, axis=0)
+    print("4")
     img_processed /= 255.
-    
+    print("5")
     prediction = model.predict(img_processed)
 
     index = np.argmax(prediction)
@@ -42,9 +46,13 @@ def predict():
             tempDir = tempfile.gettempdir()
             image_path = os.path.join(
                 tempDir, secure_filename("temp_image.jpg"))
+            image_file.save(image_path)
+            with open(image_path, 'rb') as f:
+                image_data = f.read()
             prediction = predict_image(image_path, model)
+            print(prediction)
             response = json.dumps({"result": prediction}, ensure_ascii=False)
-            return Response(response, content_type="application/json; charset=utf-8")
+        return Response(response, content_type="application/json; charset=utf-8")
     except:
         return "Error"
     
