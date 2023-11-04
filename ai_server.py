@@ -25,9 +25,11 @@ def predict_image(filename, model):
     print("3")
     img_processed = np.expand_dims(img_array, axis=0)
     print("4")
-    img_processed /= 255.
-    print("5")
     prediction = model.predict(img_processed)
+    indexk = np.argsort(prediction[0,:])[::-1]
+
+    for i in range(2):
+        print("{}. {} ({:.3})".format(i+1, classes[indexk[i]], prediction[0, indexk[i]]))
 
     index = np.argmax(prediction)
     return classes[index]
