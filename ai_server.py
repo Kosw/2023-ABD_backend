@@ -12,9 +12,27 @@ from tensorflow.keras.preprocessing import image
 
 app = Flask(__name__)
 
-model = tf.keras.models.load_model('./고선우.h5')
+model = tf.keras.models.load_model('./trash.h5')
 
-classes = ["코르크 마개", "키보드"]
+classes = ['가위',
+ '건전지',
+ '고무장갑',
+ '공병',
+ '노트북',
+ '멀티탭',
+ '박스',
+ '비닐',
+ '상의',
+ '스티로폼',
+ '신발',
+ '유리컵',
+ '전구',
+ '접시',
+ '캔',
+ '페트병',
+ '하의',
+ '핸드폰',
+ '화분']
     
 
 def predict_image(filename, model):
